@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section id="deleteDriver" class="contact">
+    <div class="container">
+
+        <div class="section-title" data-aos="zoom-out">
+            <h2>Delete Driver</h2>
+        </div>
+
+        <form action="{% url 'delete_driver' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="driver_id" class="form-control" id="driver_id" placeholder="Enter Driver ID" required>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+{% if success == "yes" %}
+    <script>
+        alert('Driver Removed Successfully');
+        window.location=('{% url 'edit_driver' %}');
+    </script>
+{% endif %}
+
+{% if error == "yes" %}
+    <script>
+        alert('Invalid Input, Try Again...');
+    </script>
+{% endif %}
+
+{% endblock %}
